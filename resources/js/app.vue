@@ -1,7 +1,7 @@
 <template>
     <div>
-        <navbar></navbar>
-        <div class="container">
+        <div class="container is-clipped">
+            <navbar></navbar>
             <router-view></router-view>
         </div>
     </div>
