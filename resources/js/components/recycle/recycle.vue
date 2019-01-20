@@ -23,7 +23,7 @@
                 <div class="control">
                     <div class="file has-name is-right is-fullwidth">
                         <label class="file-label">
-                            <input @change="attachment_change" ref="attachment" accept="image/png, image/jpeg" multiple class="file-input" type="file">
+                            <input @change="attachment_change" ref="attachment" accept="image/*" class="file-input" type="file" multiple>
                             <span class="file-cta">
                                 <span class="file-icon">
                                     <img src="../../../../storage/app/image/upload.png">
