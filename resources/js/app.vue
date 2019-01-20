@@ -1,11 +1,18 @@
 <template>
     <div>
-        <div class="container is-clipped">
+        <div class="is-clipped">
             <navbar></navbar>
-            <router-view></router-view>
+            <div class="container">
+                <router-view></router-view>
+            </div>
         </div>
     </div>
 </template>
+<style scoped>
+    .container {
+        padding: 1rem;
+    }
+</style>
 <script>
     import Navbar from "./components/layout/header.vue"
 

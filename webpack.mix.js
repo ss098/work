@@ -13,3 +13,9 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
+    .extract(["vue", "vue-router", "sweetalert", "bulma", "axios", "filesize"])
+
+if (mix.inProduction()) {
+    mix.version()
+    mix.disableNotifications()
+}

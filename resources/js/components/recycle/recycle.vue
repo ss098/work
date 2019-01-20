@@ -117,7 +117,7 @@
                         const file = files[i]
                         const reader = new FileReader()
 
-                        reader.onload = (e) => {
+                        reader.onload = e => {
                             attachment.push({
                                 name: file.name,
                                 size: file.size,
