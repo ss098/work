@@ -34,7 +34,7 @@
                             </span>
                             <span class="file-name">
                                 <span v-if="recycle.attachment.length > 0">
-                                    已选择 {{ recycle.attachment.length }} 个文件
+                                    已选择 {{ recycle.attachment.length }} 张图片
                                 </span>
                             </span>
                         </label>
@@ -47,10 +47,15 @@
                 确定
             </button>
 
-            <div v-for="file in recycle.attachment">
+            <div v-for="(file, index) in recycle.attachment">
                 <div class="box">
                     <img :src="file.data" />
-                    <p class="has-text-centered">{{ filesize(file.size) }}</p>
+                    <div class="has-text-centered">
+                        <div class="buttons has-addons is-centered">
+                            <span class="button">{{ filesize(file.size) }}</span>
+                            <span @click="recycle.attachment.splice(index, 1)" class="button is-danger">删除</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,7 +65,7 @@
     .box {
         margin: 1rem 0;
     }
-</style>
+</style>a
 <script>
     import swal from "sweetalert"
     import filesize from "filesize"
@@ -111,7 +116,7 @@
                 const files = this.$refs.attachment.files
 
                 if (files.length > 0) {
-                    const attachment = []
+                    let attachment = this.recycle.attachment
 
                     for (let i = 0; i < files.length; i++) {
                         const file = files[i]
