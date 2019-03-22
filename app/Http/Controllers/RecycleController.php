@@ -78,6 +78,8 @@ class RecycleController extends Controller
         $path = storage_path('app/' . $attachment->name);
         $img = Image::make($path);
 
+        Image::configure(array('driver' => 'imagick'));
+
         return $img->response('jpg');
 
         // return Storage::download($attachment->name);
