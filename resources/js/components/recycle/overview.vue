@@ -37,7 +37,7 @@
                 </tbody>
             </table>
 
-            <div class="field">
+            <div v-if="records.length > 0" class="field">
                 <div class="control is-expanded">
                     <a :href="`/recycle/export?id=${id}`" class="button is-link">
                         导出
