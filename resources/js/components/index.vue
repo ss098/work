@@ -1,8 +1,6 @@
 <template>
     <div class="columns is-centered">
-        <div class="column is-one-quarter has-text-centered">
-            <h2 class="subtitle">简化教育信息收集过程</h2>
-            <p>帮助你轻松完成教育数据收集与整理，例如劳民伤财费神的青年大学习截图收集</p>
+        <div class="column is-one-quarter">
             <div class="field has-addons">
                 <div class="control is-expanded">
                     <input @keydown.enter="create" v-model="name" autofocus class="input" type="text" placeholder="新表单">
@@ -14,7 +12,19 @@
                 </div>
             </div>
 
-            <p>Copyright &copy; 2019 MicroCute</p>
+            <nav v-if="forms && forms.length > 0" class="panel">
+                <router-link :to='{name: "recycle", params: {id: item.id}}' v-for="item in forms" :class="{
+                    'panel-block': true,
+                    'is-active': item.record.length > 0
+                }">
+                    <span class="panel-icon">
+                        {{ item.record.length }}
+                    </span>
+                    {{ item.name }}
+                </router-link>
+            </nav>
+
+            <p class="has-text-centered">Copyright &copy; 2019 小可爱</p>
         </div>
     </div>
 </template>
@@ -22,14 +32,6 @@
     .field {
         margin-top: 4rem;
         user-select: none;
-    }
-
-    h2 {
-        margin-top: 4rem;
-    }
-
-    p {
-        margin-top: 4rem;
     }
 </style>
 <script>
@@ -39,7 +41,9 @@
         data: () => {
             return {
                 name: "",
-                loading: false
+                loading: false,
+                forms_loading: false,
+                forms: []
             }
         },
         methods: {
@@ -71,7 +75,21 @@
                         })
                     }
                 }
+            },
+            get_forms: function () {
+                this.forms_loading = true
+                axios.get("/all").then(response => {
+                    if (response.data.success) {
+                        this.forms = response.data.forms
+                        this.forms_loading = false
+                    } else {
+                        this.forms_loading = false
+                    }
+                })
             }
+        },
+        mounted: function () {
+            this.get_forms()
         }
     }
 </script>

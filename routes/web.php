@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'IndexController@index');
+Route::get('/all', 'IndexController@all');
 Route::get('/detail', 'IndexController@detail');
 Route::post('/create', 'IndexController@create');
 

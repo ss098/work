@@ -44,4 +44,16 @@ class IndexController extends Controller
             'success' => false
         ];
     }
+
+    public function all(Request $request)
+    {
+        $form = Form::with(['record' => function ($query) {
+            $query->orderBy('updated_at', 'desc');
+        }])->orderBy('id', 'desc')->get();
+
+        return [
+            'success' => true,
+            'forms' => $form
+        ];
+    }
 }
