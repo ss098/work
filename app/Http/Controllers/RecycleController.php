@@ -6,7 +6,7 @@ use App\Attachment;
 use App\Form;
 use App\Record;
 use Illuminate\Http\Request;
-use Image;
+use Storage;
 
 class RecycleController extends Controller
 {
@@ -75,14 +75,7 @@ class RecycleController extends Controller
         $id = $request->input('id');
         $attachment = Attachment::find($id);
 
-        $path = storage_path('app/' . $attachment->name);
-        $img = Image::make($path);
-
-        Image::configure(array('driver' => 'imagick'));
-
-        return $img->response('jpg');
-
-        // return Storage::download($attachment->name);
+        return Storage::download($attachment->name);
     }
 
     public function export(Request $request)

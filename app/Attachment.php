@@ -4,17 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Image;
 
 class Attachment extends Model
 {
     // 存储文件到磁盘
     public function store($attachment)
     {
-        $content = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $attachment['data']));
-        $extension = pathinfo($attachment['name'], PATHINFO_EXTENSION);
-        $filename = str_random(32) . '.' . $extension;
+        $filename = strtolower(str_random(32) . '.jpg');
 
-        Storage::put($filename, $content);
+        $image = Image::make($attachment['data']);
+        $path = storage_path('app/' . $filename);
+        $image->save($path);
 
         $this->record_id = $attachment['record_id'];
         $this->name = $filename;
