@@ -20,6 +20,8 @@ class Attachment extends Model
         $this->record_id = $attachment['record_id'];
         $this->name = $filename;
         $this->size = Storage::size($filename);
+
+        $image->destroy();
     }
 
     public function delete_file()
