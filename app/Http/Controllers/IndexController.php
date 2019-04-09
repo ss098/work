@@ -47,9 +47,7 @@ class IndexController extends Controller
 
     public function all(Request $request)
     {
-        $form = Form::with(['record' => function ($query) {
-            $query->orderBy('updated_at', 'desc');
-        }])->orderBy('id', 'desc')->get();
+        $form = Form::withCount('record')->orderBy('id', 'desc')->get();
 
         return [
             'success' => true,

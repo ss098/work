@@ -13,18 +13,18 @@
             </div>
 
             <nav v-if="forms && forms.length > 0" class="panel">
-                <router-link :to='{name: "recycle", params: {id: item.id}}' v-for="item in forms" :class="{
+                <router-link :to='{name: "recycle", params: {id: item.id}}' v-for="item in forms" :key="item.id" :class="{
                     'panel-block': true,
-                    'is-active': item.record.length > 0
+                    'is-active': item.record_count > 0
                 }">
                     <span class="panel-icon">
-                        {{ item.record.length }}
+                        {{ item.record_count }}
                     </span>
                     {{ item.name }}
                 </router-link>
             </nav>
 
-            <p class="has-text-centered">Copyright &copy; 2019 小可爱</p>
+            <p class="has-text-centered">Copyright &copy; {{ year }} 小可爱</p>
         </div>
     </div>
 </template>
@@ -86,6 +86,13 @@
                         this.forms_loading = false
                     }
                 })
+            }
+        },
+        computed: {
+            year: function () {
+                let date = new Date()
+
+                return date.getFullYear()
             }
         },
         mounted: function () {
