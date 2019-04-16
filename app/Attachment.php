@@ -3,11 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Image;
 
 class Attachment extends Model
 {
+    use SoftDeletes;
+
     // 存储文件到磁盘
     public function store($attachment)
     {
