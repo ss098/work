@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
-use Image;
+use Intervention\Image\ImageManager;
 
 class Attachment extends Model
 {
@@ -16,7 +16,8 @@ class Attachment extends Model
     {
         $filename = strtolower(str_random(32) . '.jpg');
 
-        $image = Image::make($attachment['data']);
+        $manager = new ImageManager(array('driver' => 'imagick'));
+        $image = $manager->make($attachment['data']);
         $path = storage_path('app/' . $filename);
         $image->save($path);
 
