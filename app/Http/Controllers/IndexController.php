@@ -32,8 +32,7 @@ class IndexController extends Controller
 
         $detail = Form::find($id);
 
-        if ($detail)
-        {
+        if ($detail) {
             return [
                 'success' => true,
                 'detail' => $detail
@@ -47,7 +46,7 @@ class IndexController extends Controller
 
     public function all(Request $request)
     {
-        $form = Form::withCount('record')->orderBy('id', 'desc')->get();
+        $form = Form::withCount('record')->orderBy('id', 'desc')->limit(100)->get();
 
         return [
             'success' => true,
