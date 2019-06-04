@@ -16,7 +16,7 @@ class Attachment extends Model
     {
         $filename = strtolower(str_random(32) . '.jpg');
 
-        $manager = new ImageManager(array('driver' => 'imagick'));
+        $manager = new ImageManager();
         $image = $manager->make($attachment['data']);
         $path = storage_path('app/' . $filename);
         $image->save($path);
