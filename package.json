@@ -16,7 +16,7 @@
     "filesize": "^4.0.0",
     "laravel-mix": "^4.0.7",
     "resolve-url-loader": "^2.3.2",
-    "sass": "^1.15.2",
+    "sass": "^1.22.7",
     "sass-loader": "^7.1.0",
     "sweetalert": "^2.1.2",
     "vue": "^2.5.17",
