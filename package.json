@@ -20,7 +20,7 @@
     "sass-loader": "^7.1.0",
     "sweetalert": "^2.1.2",
     "vue": "^2.5.17",
-    "vue-router": "^3.0.2",
+    "vue-router": "^3.0.7",
     "vue-template-compiler": "^2.5.22"
   }
 }
