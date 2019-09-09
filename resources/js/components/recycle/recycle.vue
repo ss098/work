@@ -151,6 +151,7 @@
                     })
                 } else if (!this.post_loading) {
                     this.post_loading = true
+
                     axios.post("/recycle", {
                         id: this.detail.id,
                         recycle: recycle
@@ -159,6 +160,14 @@
                             text: "提交成功",
                             icon: "success"
                         })
+
+                        this.post_loading = false
+                    }).catch(error => {
+                        swal({
+                            text: "提交失败",
+                            icon: "error"
+                        })
+
                         this.post_loading = false
                     })
                 }
