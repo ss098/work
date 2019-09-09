@@ -69,6 +69,7 @@
 <script>
     import swal from "sweetalert"
     import filesize from "filesize"
+    import ImageCompressor from "image-compressor.js"
 
     export default {
         data: () => {
@@ -120,17 +121,24 @@
 
                     for (let i = 0; i < files.length; i++) {
                         const file = files[i]
-                        const reader = new FileReader()
 
-                        reader.onload = e => {
-                            attachment.push({
-                                name: file.name,
-                                size: file.size,
-                                data: e.target.result
-                            })
-                        }
+                        new ImageCompressor(file, {
+                            quality: 0.6,
+                            convertSize: 256 * 1024,
+                            success(result) {
+                                const reader = new FileReader()
 
-                        reader.readAsDataURL(file)
+                                reader.onload = e => {
+                                    attachment.push({
+                                        name: file.name,
+                                        size: file.size,
+                                        data: e.target.result
+                                    })
+                                }
+
+                                reader.readAsDataURL(result)
+                            }
+                        })
                     }
 
                     this.recycle.attachment = attachment
