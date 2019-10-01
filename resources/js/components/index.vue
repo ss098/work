@@ -1,6 +1,6 @@
 <template>
     <div class="columns is-centered">
-        <div class="column is-one-quarter">
+        <div class="column is-one-quarter has-text-centered">
             <div class="field has-addons">
                 <div class="control is-expanded">
                     <input @keydown.enter="create" v-model="name" autofocus class="input" type="text" placeholder="新表单">
@@ -24,13 +24,13 @@
                 </router-link>
             </nav>
 
-            <p class="has-text-centered">Copyright &copy; {{ year }} 小可爱</p>
+            <p>Copyright &copy; {{ year }} 小可爱</p>
+            <p>项目在 <a href="https://github.com/ss098/work">GitHub</a> 提供开放源代码版本</p>
         </div>
     </div>
 </template>
 <style scoped>
     .field {
-        margin-top: 4rem;
         user-select: none;
     }
 </style>
@@ -49,14 +49,14 @@
         methods: {
             create: function () {
                 if (!this.loading) {
-                    const name = this.name
+                    const name = this.name;
                     if (name) {
-                        this.loading = true
+                        this.loading = true;
 
                         axios.post("/create", {
                             name: name
                         }).then(response => {
-                            this.loading = false
+                            this.loading = false;
 
                             this.$router.push({name: "recycle", params: {id: response.data.id}})
                         }).catch(error => {
@@ -64,7 +64,7 @@
                                 text: "创建表单失败",
                                 icon: "error",
                                 timer: 2000
-                            })
+                            });
 
                             this.loading = false
                         })
@@ -77,10 +77,10 @@
                 }
             },
             get_forms: function () {
-                this.forms_loading = true
+                this.forms_loading = true;
                 axios.get("/all").then(response => {
                     if (response.data.success) {
-                        this.forms = response.data.forms
+                        this.forms = response.data.forms;
                         this.forms_loading = false
                     } else {
                         this.forms_loading = false
@@ -90,7 +90,7 @@
         },
         computed: {
             year: function () {
-                let date = new Date()
+                let date = new Date();
 
                 return date.getFullYear()
             }
