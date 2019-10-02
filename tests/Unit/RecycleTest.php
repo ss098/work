@@ -3,11 +3,14 @@
 namespace Tests\Unit;
 
 use App\Form;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class RecycleTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * A basic unit test example.
      *
@@ -36,6 +39,8 @@ class RecycleTest extends TestCase
 
     public function testPostRecycle()
     {
+        $this->testCreateRecycle();
+
         $recycle_id = Form::orderBy('id', 'desc')->value('id');
 
         $attachment = collect(range(1, rand(1, 20)))->map(function () {
