@@ -25,6 +25,9 @@ jobs:
       - name: Run Mix
         run: npm run production
 
+      - name: Run cp .env.example .env
+          run: cp .env.example .env
+
       - name: Run php artisan key:generate
         run: php artisan key:generate
 
