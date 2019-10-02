@@ -25,5 +25,8 @@ jobs:
       - name: Run Mix
         run: npm run production
 
+      - name: Run php artisan key:generate
+        run: php artisan key:generate
+
       - name: Run PHPUnit
         run: php7.3 vendor/bin/phpunit
