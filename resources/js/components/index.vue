@@ -1,6 +1,6 @@
 <template>
-    <div class="columns is-centered">
-        <div class="column is-one-quarter has-text-centered">
+    <div class="section columns is-centered">
+        <div class="column is-one-quarter">
             <div class="field has-addons">
                 <div class="control is-expanded">
                     <input @keydown.enter="create" v-model="name" autofocus class="input" type="text" placeholder="新表单">
@@ -24,8 +24,11 @@
                 </router-link>
             </nav>
 
-            <p>Copyright &copy; {{ year }} 小可爱</p>
-            <p>项目在 <a href="https://github.com/ss098/work">GitHub</a> 提供开放源代码版本</p>
+            <div class="content has-text-centered">
+                <p>Copyright &copy; {{ year }} 小可爱</p>
+                <p>项目在 <a href="https://github.com/ss098/work">GitHub</a> 提供开放源代码版本</p>
+            </div>
+
         </div>
     </div>
 </template>
@@ -64,7 +67,7 @@
                                 text: "创建表单失败",
                                 icon: "error",
                                 timer: 2000
-                            });
+                            })
 
                             this.loading = false
                         })

@@ -1,5 +1,5 @@
 <template>
-    <div class="has-text-centered">
+    <div class="section has-text-centered">
         <div class="sk-folding-cube">
             <div class="sk-cube1 sk-cube"></div>
             <div class="sk-cube2 sk-cube"></div>
@@ -13,13 +13,12 @@
 </template>
 <style scoped>
     .sk-folding-cube {
-        margin: 16px auto;
+        margin: 1rem auto;
         width: 64px;
         height: 64px;
         position: relative;
         -webkit-transform: rotateZ(45deg);
         transform: rotateZ(45deg);
-        margin-top: 4rem;
     }
 
     .sk-folding-cube .sk-cube {
@@ -114,7 +113,7 @@
     }
 
     p {
-        margin-top: 4rem;
+        margin: 4rem auto;
         user-select: none;
     }
 </style>

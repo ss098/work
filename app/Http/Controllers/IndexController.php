@@ -53,4 +53,14 @@ class IndexController extends Controller
             'forms' => $form
         ];
     }
+
+    public function notice(Request $request)
+    {
+        return [
+            'enable' => env('NOTICE_ENABLE'),
+            'title' => env('NOTICE_TITLE'),
+            'text' => env('NOTICE_TEXT'),
+            'icon' => env('NOTICE_ICON')
+        ];
+    }
 }

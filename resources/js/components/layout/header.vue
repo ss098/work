@@ -18,6 +18,12 @@
                     统计
                 </router-link>
             </li>
+
+            <li :class="{'is-active': name === 'guide'}">
+                <router-link :to="{name: 'guide'}">
+                    指南
+                </router-link>
+            </li>
         </ul>
     </nav>
 </template>

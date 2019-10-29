@@ -1,5 +1,5 @@
 <template>
-    <div class="columns is-centered">
+    <div class="section columns is-centered">
         <loading v-if="loading"></loading>
         <div v-else class="column is-two-thirds">
             <h2 class="subtitle has-text-centered">

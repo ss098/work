@@ -5,6 +5,7 @@ import VueRouter from "vue-router"
 import App from "./app.vue"
 import Loading from "./components/layout/loading.vue"
 import Index from "./components/index.vue"
+import Guide from "./components/guide/guide.vue"
 import Recycle from "./components/recycle/recycle.vue"
 import RecycleOverview from "./components/recycle/overview.vue"
 
@@ -20,6 +21,11 @@ const router = new VueRouter({
             component: Index
         },
         {
+            name: "guide",
+            path: "/guide",
+            component: Guide
+        },
+        {
             name: "recycle",
             path: "/recycle/:id",
             component: Recycle
@@ -31,7 +37,6 @@ const router = new VueRouter({
         }
     ]
 })
-
 
 const app = new Vue({
     router,

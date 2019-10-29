@@ -32,8 +32,8 @@ class RecycleController extends Controller
         $id = $request->input('id');
         $recycle = $request->input('recycle');
 
-        $recycle['name'] = trim($recycle['name']);
-        $recycle['code'] = trim($recycle['code']);
+        $recycle['name'] = trim($request->input('recycle.name'));
+        $recycle['code'] = trim($request->input('recycle.code'));
 
         $record = Record::where('form_id', $id)
             ->where('code', $recycle['code'])
@@ -89,13 +89,19 @@ class RecycleController extends Controller
 
         foreach ($form->record as $record)
         {
-            $folder = $zipper->folder($record->name . $record->code);
-
             foreach ($record->attachment as $index => $attachment)
             {
+                $zipper->home();
                 $extension = pathinfo($attachment->name, PATHINFO_EXTENSION);
 
-                $folder->add(storage_path('app/' . $attachment->name), ($index + 1).'.'.$extension);
+                if ($record->attachment->count() > 1)
+                {
+                    $folder = $zipper->folder($record->name . $record->code);
+
+                    $folder->add(storage_path('app/' . $attachment->name), ($index + 1).'.'.$extension);
+                } else {
+                    $zipper->add(storage_path('app/' . $attachment->name), $record->name . $record->code . '.' . $extension);
+                }
             }
 
         }
