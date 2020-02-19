@@ -29,7 +29,7 @@
                     <tr v-for="record in records">
                         <td>{{ record.name }}</td>
                         <td>{{ record.code }}</td>
-                        <td>{{ record.attachment.length }}</td>
+                        <td v-if="!display_image">{{ record.attachment.length }}</td>
                         <td v-if="display_image" v-for="attachment in record.attachment">
                             <img :src="`/recycle/attachment?id=${attachment.id}`" >
                         </td>
