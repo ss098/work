@@ -21,14 +21,7 @@
                     <li>在统计页面可以观察到收集进度，可以在此导出压缩包</li>
                 </ol>
 
-                <p>数据在服务器上留存 14 日，超期自动清理。</p>
-            </section>
-            <section class="section">
-                <div class="has-text-centered">
-                    <p>你可以出于自愿的向项目资助，以便项目可持续的运营</p>
-
-                    <img alt="给我打钱" src="../../../../storage/app/image/wechat_qrcode.png" />
-                </div>
+                <p>数据不定期清理，请注意保留文件备份。</p>
             </section>
         </div>
     </div>

@@ -22,7 +22,7 @@
                 <tr>
                     <th width="96">姓名</th>
                     <th width="96">学号</th>
-                    <th width="96">图片数量</th>
+                    <th width="96" v-if="!display_image">图片数量</th>
                 </tr>
                 </thead>
                 <tbody>
