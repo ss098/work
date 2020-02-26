@@ -22,7 +22,6 @@
         },
         mounted: function () {
             axios.get("/notice").then(response => {
-                console.log(response)
                 if (response.data.enable) {
                     swal({
                         title: response.data.title,
