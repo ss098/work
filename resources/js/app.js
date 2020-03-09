@@ -1,7 +1,8 @@
 window.axios = require("axios")
 
-import * as Vue from 'vue/dist/vue.common.js'
+import * as Vue from "vue/dist/vue.common.js"
 import VueRouter from "vue-router"
+import SimpleAnalytics from "simple-analytics-vue"
 import App from "./app.vue"
 import Loading from "./components/layout/loading.vue"
 import Index from "./components/index.vue"
@@ -10,6 +11,7 @@ import Recycle from "./components/recycle/recycle.vue"
 import RecycleOverview from "./components/recycle/overview.vue"
 
 Vue.use(VueRouter)
+Vue.use(SimpleAnalytics, {skip: process.env.MIX_ENABLE_SIMPLE_ANALYTICS !== "true"})
 Vue.component("loading", Loading)
 
 const router = new VueRouter({
