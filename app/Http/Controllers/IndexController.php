@@ -44,23 +44,13 @@ class IndexController extends Controller
         ];
     }
 
-    public function all(Request $request)
+    public function all()
     {
         $form = Form::withCount('record')->orderBy('id', 'desc')->limit(100)->get();
 
         return [
             'success' => true,
             'forms' => $form
-        ];
-    }
-
-    public function notice(Request $request)
-    {
-        return [
-            'enable' => env('NOTICE_ENABLE'),
-            'title' => env('NOTICE_TITLE'),
-            'text' => env('NOTICE_TEXT'),
-            'icon' => env('NOTICE_ICON')
         ];
     }
 }

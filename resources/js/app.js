@@ -11,7 +11,7 @@ import Recycle from "./components/recycle/recycle.vue"
 import RecycleOverview from "./components/recycle/overview.vue"
 
 Vue.use(VueRouter)
-Vue.use(SimpleAnalytics, {skip: process.env.MIX_ENABLE_SIMPLE_ANALYTICS !== "true"})
+Vue.use(SimpleAnalytics, {skip: process.env.MIX_SIMPLE_ANALYTICS_ENABLE !== "true"})
 Vue.component("loading", Loading)
 
 const router = new VueRouter({

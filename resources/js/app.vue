@@ -21,15 +21,14 @@
             Navbar
         },
         mounted: function () {
-            axios.get("/notice").then(response => {
-                if (response.data.enable) {
-                    swal({
-                        title: response.data.title,
-                        text: response.data.text,
-                        icon: response.data.icon
-                    })
-                }
-            })
+            if (process.env.MIX_NOTICE_ENABLE === "true") {
+                swal({
+                    title: process.env.MIX_NOTICE_TITLE,
+                    text: process.env.MIX_NOTICE_TEXT,
+                    icon: process.env.MIX_NOTICE_ICON
+                })
+            }
+
         }
     }
 </script>
