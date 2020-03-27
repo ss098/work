@@ -16,7 +16,7 @@ class Attachment extends Migration
         Schema::create('attachments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('record_id'); // 记录 ID
-            $table->string('name'); // 文件大小
+            $table->string('name'); // 文件名称
             $table->integer('size'); // 文件大小
             $table->timestamps();
             $table->softDeletes();

@@ -6,7 +6,7 @@ use App\Attachment;
 use App\Form;
 use App\Record;
 use Illuminate\Http\Request;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 
 class RecycleController extends Controller
 {

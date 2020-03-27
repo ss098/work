@@ -1,6 +1,14 @@
 <template>
-    <div class="section columns is-centered">
+    <div class="columns is-centered">
         <div class="column is-one-quarter">
+            <article class="message" v-if="notice.enable === 'true'">
+                <div v-if="notice.title" class="message-header">
+                    <p>{{ notice.title }}</p>
+                </div>
+                <div class="message-body">
+                    {{ notice.text }}
+                </div>
+            </article>
             <div class="field has-addons">
                 <div class="control is-expanded">
                     <input @keydown.enter="create" v-model="name" autofocus class="input" type="text" placeholder="新表单">
@@ -52,14 +60,15 @@
         methods: {
             create: function () {
                 if (!this.loading) {
-                    const name = this.name;
+                    const name = this.name
+
                     if (name) {
-                        this.loading = true;
+                        this.loading = true
 
                         axios.post("/create", {
                             name: name
                         }).then(response => {
-                            this.loading = false;
+                            this.loading = false
 
                             this.$router.push({name: "recycle", params: {id: response.data.id}})
                         }).catch(error => {
@@ -80,10 +89,11 @@
                 }
             },
             get_forms: function () {
-                this.forms_loading = true;
+                this.forms_loading = true
+
                 axios.get("/all").then(response => {
                     if (response.data.success) {
-                        this.forms = response.data.forms;
+                        this.forms = response.data.forms
                         this.forms_loading = false
                     } else {
                         this.forms_loading = false
@@ -93,13 +103,22 @@
         },
         computed: {
             year: function () {
-                let date = new Date();
+                let date = new Date()
 
                 return date.getFullYear()
+            },
+            notice: function () {
+                return {
+                    enable: process.env.MIX_NOTICE_ENABLE,
+                    title: process.env.MIX_NOTICE_TITLE,
+                    text: process.env.MIX_NOTICE_TEXT,
+                    icon: process.env.MIX_NOTICE_ICON ? process.env.MIX_NOTICE_ICON : 'dark'
+                }
             }
         },
         mounted: function () {
             this.get_forms()
+
         }
     }
 </script>

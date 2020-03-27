@@ -1,6 +1,7 @@
 <template>
-    <div class="section columns is-centered">
+    <div class="columns is-centered">
         <loading v-if="loading"></loading>
+
         <div v-else class="column is-one-quarter has-text-centered">
             <h2 class="subtitle">
                 {{ detail.name }}
@@ -23,18 +24,18 @@
                 <div class="control">
                     <div class="file has-name is-right is-fullwidth">
                         <label class="file-label">
-                            <input @change="attachment_change" ref="attachment" accept="image/*" class="file-input" type="file" multiple>
+                            <input @change="attachment_change" ref="attachment" class="file-input" type="file" multiple>
                             <span class="file-cta">
                                 <span class="file-icon">
                                     <img src="../../../../storage/app/image/upload.png">
                                 </span>
                                 <span class="file-label">
-                                    选择图片
+                                    选择文件
                                 </span>
                             </span>
                             <span class="file-name">
                                 <span v-if="recycle.attachment.length > 0">
-                                    已选择 {{ recycle.attachment.length }} 张图片
+                                    已选择 {{ recycle.attachment.length }} 个文件
                                 </span>
                             </span>
                         </label>
@@ -47,13 +48,14 @@
                 确定
             </button>
 
-            <div v-for="(file, index) in recycle.attachment">
+            <div v-for="(attachment, index) in recycle.attachment">
                 <div class="box">
-                    <img :src="file.data" />
-                    <div class="has-text-centered">
+                    <div class="columns has-text-centered">
+                        <div class="column">
+                            <p>{{ attachment.name }}（{{ filesize(attachment.size) }}）</p>
+                        </div>
                         <div class="buttons has-addons is-centered">
-                            <span class="button">{{ filesize(file.size) }}</span>
-                            <span @click="recycle.attachment.splice(index, 1)" class="button is-danger">删除</span>
+                            <button @click="recycle.attachment.splice(index, 1)" class="button is-danger">删除</button>
                         </div>
                     </div>
                 </div>
@@ -122,23 +124,37 @@
                     for (let i = 0; i < files.length; i++) {
                         const file = files[i]
 
-                        new ImageCompressor(file, {
-                            quality: 0.6,
-                            convertSize: 256 * 1024,
-                            success(result) {
+                        if (file.size <= 1024 * 1024 * 4) {
+                            const callback = result => {
                                 const reader = new FileReader()
 
                                 reader.onload = e => {
                                     attachment.push({
                                         name: file.name,
                                         size: file.size,
-                                        data: e.target.result
+                                        data: e.target.result,
+                                        type: file.type
                                     })
                                 }
 
                                 reader.readAsDataURL(result)
                             }
-                        })
+
+                            if (file.type.startsWith("image")) {
+                                new ImageCompressor(file, {
+                                    quality: 0.6,
+                                    convertSize: 256 * 1024,
+                                    success: (result) => callback(result)
+                                })
+                            } else {
+                                callback(file)
+                            }
+                        } else {
+                            swal({
+                                text: "请勿上传超过 4 MByte 的附件",
+                                timer: 2000
+                            })
+                        }
                     }
 
                     this.recycle.attachment = attachment
@@ -168,14 +184,12 @@
                             text: "提交成功",
                             icon: "success"
                         })
-
-                        this.post_loading = false
                     }).catch(error => {
                         swal({
                             text: "提交失败",
                             icon: "error"
                         })
-
+                    }).finally(() => {
                         this.post_loading = false
                     })
                 }

@@ -1,6 +1,7 @@
 <template>
-    <div class="section columns is-centered">
+    <div class="columns is-centered">
         <loading v-if="loading"></loading>
+
         <div v-else class="column is-two-thirds">
             <h2 class="subtitle has-text-centered">
                 表单统计
@@ -8,7 +9,7 @@
 
             <div class="field">
                 <label class="checkbox">
-                    <input v-model="display_image" type="checkbox">
+                    <input v-model="display_attachment" type="checkbox">
                     显示图片
                 </label>
 
@@ -20,17 +21,18 @@
             <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
                 <thead>
                 <tr>
-                    <th width="96">姓名</th>
-                    <th width="96">学号</th>
-                    <th width="96" v-if="!display_image">图片数量</th>
+                    <th>姓名</th>
+                    <th>学号</th>
+                    <th v-if="!display_attachment">附件数量</th>
                 </tr>
                 </thead>
                 <tbody>
                     <tr v-for="record in records">
                         <td>{{ record.name }}</td>
                         <td>{{ record.code }}</td>
-                        <td v-if="!display_image">{{ record.attachment.length }}</td>
-                        <td v-if="display_image" v-for="attachment in record.attachment">
+                        <td v-if="!display_attachment">{{ record.attachment.length }}</td>
+                        <td v-if="display_attachment && is_image_attachment(attachment.name)"
+                            v-for="attachment in record.attachment">
                             <img :src="`/recycle/attachment?id=${attachment.id}`" >
                         </td>
                     </tr>
@@ -55,7 +57,7 @@
             return {
                 records: null,
                 loading: true,
-                display_image: false
+                display_attachment: false
             }
         },
         methods: {
@@ -80,6 +82,17 @@
                         this.$router.push({name: "index"})
                     }
                 })
+            },
+            is_image_attachment: function (name) {
+                const extensions = ["jpg", "png"]
+
+                for (let i = 0; i < extensions.length; i++) {
+                    const extension = extensions[i]
+
+                    if (name.endsWith(extension)) {
+                        return true
+                    }
+                }
             }
         },
         computed: {
