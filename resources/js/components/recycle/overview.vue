@@ -1,5 +1,5 @@
 <template>
-    <div class="columns is-centered">
+    <div class="columns is-centered container-horizontal">
         <loading v-if="loading"></loading>
 
         <div v-else class="column is-two-thirds">

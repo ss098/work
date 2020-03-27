@@ -1,5 +1,5 @@
 <template>
-    <div class="columns is-centered">
+    <div class="columns is-centered container-horizontal">
         <loading v-if="loading"></loading>
 
         <div v-else class="column is-one-quarter has-text-centered">
@@ -67,7 +67,7 @@
     .box {
         margin: 1rem 0;
     }
-</style>a
+</style>
 <script>
     import swal from "sweetalert"
     import filesize from "filesize"

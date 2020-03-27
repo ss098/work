@@ -1,5 +1,5 @@
 <template>
-    <div class="columns is-centered">
+    <div class="columns is-centered container-horizontal">
         <div class="column is-one-quarter">
             <article class="message" v-if="notice.enable === 'true'">
                 <div v-if="notice.title" class="message-header">

@@ -7,11 +7,6 @@
         </div>
     </div>
 </template>
-<style scoped>
-    .container {
-        padding: 1rem;
-    }
-</style>
 <script>
     import swal from "sweetalert"
     import Navbar from "./components/layout/header.vue"
