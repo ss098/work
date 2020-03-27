@@ -87,9 +87,9 @@
                 const extensions = ["jpg", "jpeg", "png", "webp", "svg"]
 
                 for (let i = 0; i < extensions.length; i++) {
-                    const extension = extensions[i].toLowerCase()
+                    const extension = extensions[i]
 
-                    if (name.endsWith(extension)) {
+                    if (name.toLowerCase().endsWith(extension)) {
                         return true
                     }
                 }
