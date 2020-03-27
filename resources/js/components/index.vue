@@ -111,8 +111,7 @@
                 return {
                     enable: process.env.MIX_NOTICE_ENABLE,
                     title: process.env.MIX_NOTICE_TITLE,
-                    text: process.env.MIX_NOTICE_TEXT,
-                    icon: process.env.MIX_NOTICE_ICON ? process.env.MIX_NOTICE_ICON : 'dark'
+                    text: process.env.MIX_NOTICE_TEXT
                 }
             }
         },
