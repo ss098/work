@@ -84,10 +84,10 @@
                 })
             },
             is_image_attachment: function (name) {
-                const extensions = ["jpg", "png"]
+                const extensions = ["jpg", "jpeg", "png", "webp", "svg"]
 
                 for (let i = 0; i < extensions.length; i++) {
-                    const extension = extensions[i]
+                    const extension = extensions[i].toLowerCase()
 
                     if (name.endsWith(extension)) {
                         return true
