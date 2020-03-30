@@ -14,15 +14,19 @@ class RecycleController extends Controller
     {
         // 概览表单的提交情况
         $id = $request->input('id');
+        $order_by = $request->input('order_by');
 
         $record = Record::with('attachment')
-            ->where('form_id', $id)
-            ->orderBy('code')
-            ->get();
+            ->where('form_id', $id);
+
+        if (in_array($order_by, ['code', 'updated_at']))
+        {
+            $record->orderBy($order_by);
+        }
 
         return [
             'success' => true,
-            'records' => $record
+            'records' => $record->get()
         ];
     }
 

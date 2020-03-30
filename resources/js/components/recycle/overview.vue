@@ -8,13 +8,23 @@
             </h2>
 
             <div class="field">
-                <label class="checkbox">
-                    <input v-model="display_attachment" type="checkbox">
-                    显示图片
+                <label class="radio">
+                    <input v-model="order_by" type="radio" value="code">
+                    按照学号排序
+                </label>
+                <label class="radio">
+                    <input v-model="order_by" type="radio" value="updated_at">
+                    按照最后修改时间排序
                 </label>
 
-                <div v-if="records" class="is-pulled-right">
-                    共 {{ records.length }} 条数据（使用 {{ attachment_size }} 配额）
+                <div class="is-pulled-right">
+                    <label v-if="records">
+                        共 {{ records.length }} 条数据（使用 {{ attachment_size }} 配额）
+                    </label>
+                    <label class="checkbox">
+                        <input v-model="display_attachment" type="checkbox">
+                        显示图片
+                    </label>
                 </div>
             </div>
 
@@ -24,7 +34,7 @@
                     <th>姓名</th>
                     <th>学号</th>
                     <th v-if="!display_attachment">附件数量</th>
-                    <th v-if="!display_attachment">提交时间</th>
+                    <th v-if="!display_attachment">最后修改时间</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,7 +47,7 @@
                             <img :src="`/recycle/attachment?id=${attachment.id}`" >
                         </td>
                         <td v-if="!display_attachment">
-                            {{ record.created_at }}
+                            {{ record.updated_at }}
                         </td>
                     </tr>
                 </tbody>
@@ -62,16 +72,20 @@
             return {
                 records: null,
                 loading: true,
-                display_attachment: false
+                display_attachment: false,
+                order_by: "code"
             }
         },
         methods: {
             get_records: function () {
                 this.loading = true
+
                 const id = this.id
+
                 axios.get("/recycle/overview", {
                     params: {
-                        id: id
+                        id: id,
+                        order_by: this.order_by
                     }
                 }).then(response => {
                     if (response.data.success) {
@@ -118,6 +132,9 @@
         },
         watch: {
             id: function () {
+                this.get_records()
+            },
+            order_by: function () {
                 this.get_records()
             }
         },
