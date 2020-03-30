@@ -14,7 +14,7 @@
                 </label>
 
                 <div v-if="records" class="is-pulled-right">
-                    共 {{ records.length }} 条数据
+                    共 {{ records.length }} 条数据（使用 {{ attachment_size }} 配额）
                 </div>
             </div>
 
@@ -24,6 +24,7 @@
                     <th>姓名</th>
                     <th>学号</th>
                     <th v-if="!display_attachment">附件数量</th>
+                    <th v-if="!display_attachment">提交时间</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -34,6 +35,9 @@
                         <td v-if="display_attachment && is_image_attachment(attachment.name)"
                             v-for="attachment in record.attachment">
                             <img :src="`/recycle/attachment?id=${attachment.id}`" >
+                        </td>
+                        <td v-if="!display_attachment">
+                            {{ record.created_at }}
                         </td>
                     </tr>
                 </tbody>
@@ -51,6 +55,7 @@
 </template>
 <script>
     import swal from "sweetalert"
+    import filesize from "filesize"
 
     export default {
         data: () => {
@@ -98,6 +103,17 @@
         computed: {
             id: function () {
                 return this.$route.params.id
+            },
+            attachment_size: function () {
+                let size = 0
+
+                for (const record of this.records) {
+                    for (const attachment of record.attachment) {
+                        size += attachment.size
+                    }
+                }
+
+                return filesize(size)
             }
         },
         watch: {
