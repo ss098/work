@@ -13,7 +13,8 @@ class Attachment extends Model
     // 存储文件到磁盘
     public function store($attachment)
     {
-        $content = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $attachment['data']));
+        $content = base64_decode(preg_replace('#^data:(.+);base64,#i', '', $attachment['data']));
+
         $extension = pathinfo($attachment['name'], PATHINFO_EXTENSION);
         $filename = str_random(32) . '.' . $extension;
         Storage::put($filename, $content);
