@@ -31,6 +31,15 @@ Work 的核心目的是略过技术，设计出一个功能简单易用兼容移
     
 将 Web 服务器运行目录设为 `public`。
 
+如果您的服务器为 Nginx 服务器，请您手动配置伪静态：
+
+```
+location /
+{
+	 try_files $uri $uri/ /index.php?$args;
+}
+```
+
 ### 维护 ###
 
 项目中的导出功能由 Laravel 的 `deleteFileAfterSend` 方法提供，该方法在特定的情况下客户端下载文件后不会自动清理文件。
