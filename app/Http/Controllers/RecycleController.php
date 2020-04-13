@@ -85,8 +85,13 @@ class RecycleController extends Controller
     public function export(Request $request)
     {
         $id = $request->input('id');
+        $format = $request->input('format');
         $form = Form::find($id);
         $filename = storage_path(str_random(32) . '.zip');
+
+        if (empty($format)) {
+            $format = 'name code';
+        }
 
         $zipper = new \Chumper\Zipper\Zipper;
         $zipper->make($filename);
@@ -98,13 +103,16 @@ class RecycleController extends Controller
                 $zipper->home();
                 $extension = pathinfo($attachment->name, PATHINFO_EXTENSION);
 
+                $attachment_name = str_replace('name', $record->name, $format);
+                $attachment_name = str_replace('code', $record->code, $attachment_name);
+
                 if ($record->attachment->count() > 1)
                 {
-                    $folder = $zipper->folder($record->name . $record->code);
+                    $folder = $zipper->folder($attachment_name);
 
                     $folder->add(storage_path('app/' . $attachment->name), ($index + 1).'.'.$extension);
                 } else {
-                    $zipper->add(storage_path('app/' . $attachment->name), $record->name . $record->code . '.' . $extension);
+                    $zipper->add(storage_path('app/' . $attachment->name), $attachment_name . '.' . $extension);
                 }
             }
 

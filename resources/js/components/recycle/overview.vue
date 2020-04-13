@@ -38,27 +38,38 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="record in records">
-                        <td>{{ record.name }}</td>
-                        <td>{{ record.code }}</td>
-                        <td v-if="!display_attachment">{{ record.attachment.length }}</td>
-                        <td v-if="display_attachment && is_image_attachment(attachment.name)"
-                            v-for="attachment in record.attachment">
-                            <img :src="`/recycle/attachment?id=${attachment.id}`" >
-                        </td>
-                        <td v-if="!display_attachment">
-                            {{ record.updated_at }}
-                        </td>
-                    </tr>
+                <tr v-for="record in records">
+                    <td>{{ record.name }}</td>
+                    <td>{{ record.code }}</td>
+                    <td v-if="!display_attachment">{{ record.attachment.length }}</td>
+                    <td v-if="display_attachment && is_image_attachment(attachment.name)"
+                        v-for="attachment in record.attachment">
+                        <img :src="`/recycle/attachment?id=${attachment.id}`">
+                    </td>
+                    <td v-if="!display_attachment">
+                        {{ record.updated_at }}
+                    </td>
+                </tr>
                 </tbody>
             </table>
 
             <div v-if="records.length > 0" class="field">
-                <div class="control is-expanded">
-                    <a :href="`/recycle/export?id=${id}`" class="button is-link">
-                        导出
-                    </a>
-                </div>
+                <form action="/recycle/export" method="GET" class="field has-addons">
+                    <input type="hidden" name="id" :value="id">
+                    <div class="control">
+                        <div class="select">
+                            <select name="format">
+                                <option value="namecode">姓名 + 学号</option>
+                                <option value="codename">学号 + 姓名</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="control">
+                        <button type="submit" :href="`/recycle/export?id=${id}`" class="button is-link">
+                            导出
+                        </button>
+                    </p>
+                </form>
             </div>
         </div>
     </div>
