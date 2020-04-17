@@ -29,7 +29,7 @@ Work 的核心目的是略过技术，设计出一个功能简单易用兼容移
 
     php artisan migrate
     
-将 Web 服务器运行目录设为 `public`，并配置 Web 服务器的伪静态 [Install Laravel](https://laravel.com/docs/master/installation)。
+将 Web 服务器运行目录设为 `public`，并配置 Web 服务器的伪静态 [Pretty URLs - Installation Laravel](https://laravel.com/docs/master/installation#pretty-urls)。
 
 ### 维护 ###
 
