@@ -9,19 +9,24 @@
                     {{ notice.text }}
                 </div>
             </article>
-            <div class="field has-addons">
+
+            <label for="recycle_name" class="label">为表单起一个名字：</label>
+
+            <div class="field is-grouped">
                 <div class="control is-expanded">
-                    <input @keydown.enter="create" v-model="name" autofocus class="input" type="text" placeholder="新表单">
+                    <input id="recycle_name" @keydown.enter="create" v-model="name" autofocus class="input" type="text"
+                           placeholder="新表单">
                 </div>
                 <div class="control">
-                    <a @click="create" :class="{'button is-info': true, 'is-loading': loading}">
+                    <a @click="create" :class="{'button is-link': true, 'is-loading': loading}">
                         确定
                     </a>
                 </div>
             </div>
 
             <nav v-if="forms && forms.length > 0" class="panel">
-                <router-link :to='{name: "recycle", params: {id: item.id}}' v-for="item in forms" :key="item.id" :class="{
+                <router-link :to='{name: "recycle", params: {id: item.id}}' v-for="item in forms" :key="item.id"
+                             :class="{
                     'panel-block': true,
                     'is-active': item.record_count > 0
                 }">
@@ -32,11 +37,19 @@
                 </router-link>
             </nav>
 
-            <div class="content has-text-centered">
+            <section class="content has-text-centered">
                 <p>Copyright &copy; {{ year }} 小可爱</p>
                 <p>项目在 <a href="https://github.com/ss098/work">GitHub</a> 提供开放源代码版本</p>
-            </div>
 
+                <div v-if="analytics_enable">
+                    <p>Simple Analytics 提供隐私友好型数据分析服务</p>
+                    <a :href="`https://simpleanalytics.com/${domain}`"
+                       referrerpolicy="origin" target="_blank">
+                        <img :src="`https://simpleanalyticsbadge.com/${domain}`" referrerpolicy="no-referrer"
+                             crossorigin="anonymous" alt="Simple Analytics"/>
+                    </a>
+                </div>
+            </section>
         </div>
     </div>
 </template>
@@ -54,7 +67,9 @@
                 name: "",
                 loading: false,
                 forms_loading: false,
-                forms: []
+                forms: [],
+                analytics_enable: process.env.MIX_SIMPLE_ANALYTICS_ENABLE,
+                domain: document.domain
             }
         },
         methods: {

@@ -1,14 +1,11 @@
 <template>
-    <div>
-        <div class="is-clipped">
-            <navbar></navbar>
+    <main class="is-clipped">
+        <navbar></navbar>
 
-            <router-view></router-view>
-        </div>
-    </div>
+        <router-view></router-view>
+    </main>
 </template>
 <script>
-    import swal from "sweetalert"
     import Navbar from "./components/layout/header.vue"
 
     export default {
