@@ -37,7 +37,7 @@
                 </router-link>
             </nav>
 
-            <section class="content has-text-centered">
+            <section class="section content has-text-centered">
                 <p>Copyright &copy; {{ year }} 小可爱</p>
                 <p>项目在 <a href="https://github.com/ss098/work">GitHub</a> 提供开放源代码版本</p>
 
