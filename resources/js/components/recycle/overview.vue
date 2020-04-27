@@ -61,6 +61,8 @@
                             <select name="format">
                                 <option value="namecode">姓名 + 学号</option>
                                 <option value="codename">学号 + 姓名</option>
+                                <option value="name">姓名</option>
+                                <option value="code">学号</option>
                             </select>
                         </div>
                     </div>
