@@ -44,8 +44,8 @@
                 <div v-if="analytics_enable">
                     <p>Simple Analytics 提供隐私友好型数据分析服务</p>
                     <a :href="`https://simpleanalytics.com/${domain}`"
-                       referrerpolicy="origin" target="_blank">
-                        <img :src="`https://simpleanalyticsbadge.com/${domain}`" referrerpolicy="no-referrer"
+                       referrerpolicy="origin" target="_blank" rel="noreferrer noopener">
+                        <img :src="`https://simpleanalyticsbadge.com/${domain}?mode=dark&background=151b1c`" referrerpolicy="no-referrer"
                              crossorigin="anonymous" alt="Simple Analytics"/>
                     </a>
                 </div>
