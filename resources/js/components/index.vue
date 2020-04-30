@@ -45,7 +45,7 @@
                     <p>Simple Analytics 提供隐私友好型数据分析服务</p>
                     <a :href="`https://simpleanalytics.com/${domain}`"
                        referrerpolicy="origin" target="_blank" rel="noreferrer noopener">
-                        <img :src="`https://simpleanalyticsbadge.com/${domain}?mode=dark&background=151b1c`" referrerpolicy="no-referrer"
+                        <img :src="`https://simpleanalyticsbadge.com/${domain}?background=white&text=3273dc&logo=3273dc`" referrerpolicy="no-referrer"
                              crossorigin="anonymous" alt="Simple Analytics"/>
                     </a>
                 </div>
