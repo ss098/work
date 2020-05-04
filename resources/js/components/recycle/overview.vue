@@ -53,12 +53,14 @@
                 </tbody>
             </table>
 
+            <label class="label" for="format">格式</label>
+
             <div v-if="records.length > 0" class="field">
                 <form action="/recycle/export" method="GET" class="field has-addons">
                     <input type="hidden" name="id" :value="id">
                     <div class="control">
                         <div class="select">
-                            <select name="format">
+                            <select name="format" id="format">
                                 <option value="namecode">姓名 + 学号</option>
                                 <option value="codename">学号 + 姓名</option>
                                 <option value="name">姓名</option>

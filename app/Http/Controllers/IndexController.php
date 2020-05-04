@@ -46,7 +46,7 @@ class IndexController extends Controller
 
     public function all()
     {
-        $form = Form::withCount('record')->orderBy('id', 'desc')->limit(100)->get();
+        $form = Form::withCount('record')->orderBy('id', 'desc')->limit(25)->get();
 
         return [
             'success' => true,

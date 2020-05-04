@@ -7,15 +7,15 @@
                 {{ detail.name }}
             </h2>
             <div class="field">
-                <label class="label">姓名</label>
+                <label class="label" for="name">姓名</label>
                 <div class="control">
-                    <input v-model="recycle.name" autofocus class="input" type="text">
+                    <input id="name" v-model="recycle.name" autofocus class="input" type="text">
                 </div>
             </div>
             <div class="field">
-                <label class="label">学号</label>
+                <label class="label" for="code">学号</label>
                 <div class="control">
-                    <input v-model="recycle.code" class="input" type="text">
+                    <input id="code" v-model="recycle.code" class="input" type="text">
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
                             <input @change="attachment_change" ref="attachment" class="file-input" type="file" multiple>
                             <span class="file-cta">
                                 <span class="file-icon">
-                                    <img src="../../../../storage/app/image/upload.png">
+                                    <img src="../../../../storage/app/image/upload.png" alt="上传">
                                 </span>
                                 <span class="file-label">
                                     选择文件
@@ -41,8 +41,10 @@
                         </label>
                     </div>
                 </div>
+                <p class="help">
+                    如无法选择附件，使用浏览器打开此页面。
+                </p>
             </div>
-
 
             <button @click="post_record" :class="{'button is-link is-fullwidth': true, 'is-loading': post_loading}">
                 确定
