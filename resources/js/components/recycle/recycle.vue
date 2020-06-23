@@ -126,7 +126,7 @@
                     for (let i = 0; i < files.length; i++) {
                         const file = files[i]
 
-                        if (file.size <= 1024 * 1024 * 4) {
+                        if (file.size <= 1024 * 1024 * 16) {
                             const callback = result => {
                                 const reader = new FileReader()
 
@@ -153,7 +153,7 @@
                             }
                         } else {
                             swal({
-                                text: "请勿上传超过 4 MByte 的附件",
+                                text: "请勿上传超过 16 MByte 的附件",
                                 timer: 2000
                             })
                         }
