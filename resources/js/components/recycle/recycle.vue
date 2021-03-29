@@ -6,6 +6,13 @@
             <h2 class="subtitle">
                 {{ detail.name }}
             </h2>
+
+            <article class="message" v-if="notice.text">
+                <div class="message-body">
+                    {{ notice.text }}
+                </div>
+            </article>
+
             <div class="field">
                 <label class="label" for="name">姓名</label>
                 <div class="control">
@@ -42,12 +49,12 @@
                     </div>
                 </div>
                 <p class="help">
-                    如无法选择附件，使用浏览器打开此页面。
+                    如无法选择附件，使用系统浏览器打开此页面。
                 </p>
             </div>
 
             <button @click="post_record" :class="{'button is-link is-fullwidth': true, 'is-loading': post_loading}">
-                确定
+                提交
             </button>
 
             <div v-for="(attachment, index) in recycle.attachment">
@@ -200,6 +207,11 @@
         computed: {
             id: function () {
                 return this.$route.params.id
+            },
+            notice: function () {
+                return {
+                    text: process.env.MIX_DETAIL_TEXT
+                }
             }
         },
         watch: {
