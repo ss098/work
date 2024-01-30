@@ -40,15 +40,6 @@
             <section class="section content has-text-centered">
                 <p>Copyright &copy; {{ year }} 小可爱</p>
                 <p>项目在 <a href="https://github.com/ss098/work">GitHub</a> 提供开放源代码版本</p>
-
-                <div v-if="analytics_enable">
-                    <p>Simple Analytics 提供隐私友好型数据分析服务</p>
-                    <a :href="`https://simpleanalytics.com/${domain}`"
-                       referrerpolicy="origin" target="_blank" rel="noreferrer noopener">
-                        <img :src="`https://simpleanalyticsbadge.com/${domain}?background=white&text=3273dc&logo=3273dc`" referrerpolicy="no-referrer"
-                             crossorigin="anonymous" alt="Simple Analytics"/>
-                    </a>
-                </div>
             </section>
         </div>
     </div>
@@ -67,9 +58,7 @@
                 name: "",
                 loading: false,
                 forms_loading: false,
-                forms: [],
-                analytics_enable: process.env.MIX_SIMPLE_ANALYTICS_ENABLE,
-                domain: document.domain
+                forms: []
             }
         },
         methods: {
