@@ -17,10 +17,6 @@ Work 的核心目的是略过技术，设计出一个功能简单易用兼容移
 
 配置 `.env` 文件中的数据库信息：
 
-如需由 Sentry 提供的错误信息收集服务，可以配置 `SENTRY_LARAVEL_DSN`。
-
-如需由 Simple Analytics 提供的隐私友好型分析，可以配置 `MIX_SIMPLE_ANALYTICS_ENABLE` 为 `true`。
-
     cp .env.example .env
 
     php artisan key:generate

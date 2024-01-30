@@ -79,7 +79,7 @@
 </style>
 <script>
     import swal from "sweetalert"
-    import filesize from "filesize"
+    import { filesize } from "filesize"
     import ImageCompressor from "image-compressor.js"
 
     export default {

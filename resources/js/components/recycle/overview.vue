@@ -1,8 +1,8 @@
 <template>
-    <div class="columns is-centered container-horizontal">
+    <div>
         <loading v-if="loading"></loading>
 
-        <div v-else class="column is-two-thirds">
+        <div v-else class="column">
             <h2 class="subtitle has-text-centered">
                 表单统计
             </h2>
@@ -19,7 +19,7 @@
 
                 <div class="is-pulled-right">
                     <label v-if="records">
-                        共 {{ records.length }} 条数据（使用 {{ attachment_size }} 配额）
+                        共 {{ records.length }} 条数据（使用 {{ attachment_size }} 存储空间）
                     </label>
                     <label class="checkbox">
                         <input v-model="display_attachment" type="checkbox">
@@ -80,7 +80,7 @@
 </template>
 <script>
     import swal from "sweetalert"
-    import filesize from "filesize"
+    import { filesize } from "filesize"
 
     export default {
         data: () => {

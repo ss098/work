@@ -45,10 +45,8 @@ class TraceForms extends Command
                 foreach ($forms as $form) {
                     $records = $form->record;
 
-                    foreach ($records as $record)
-                    {
-                        foreach ($record->attachment as $attachment)
-                        {
+                    foreach ($records as $record) {
+                        foreach ($record->attachment as $attachment) {
                             echo 'delete attachment:' . $attachment->id . PHP_EOL;
 
                             if (Storage::exists($attachment->name)) {

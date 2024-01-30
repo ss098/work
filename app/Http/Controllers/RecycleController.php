@@ -7,6 +7,8 @@ use App\Form;
 use App\Record;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use ZipArchive;
 
 class RecycleController extends Controller
 {
@@ -19,8 +21,7 @@ class RecycleController extends Controller
         $record = Record::with('attachment')
             ->where('form_id', $id);
 
-        if (in_array($order_by, ['code', 'updated_at']))
-        {
+        if (in_array($order_by, ['code', 'updated_at'])) {
             $record->orderBy($order_by);
         }
 
@@ -43,12 +44,10 @@ class RecycleController extends Controller
             ->where('code', $recycle['code'])
             ->first();
 
-        if (!$record)
-        {
+        if (!$record) {
             $record = new Record();
         } else {
-            $record->attachment->each(function ($attachment)
-            {
+            $record->attachment->each(function ($attachment) {
                 $attachment->delete_file();
                 $attachment->delete();
             });
@@ -59,8 +58,7 @@ class RecycleController extends Controller
         $record->code = $recycle['code'];
         $record->save();
 
-        foreach ($recycle['attachment'] as $attachment_data)
-        {
+        foreach ($recycle['attachment'] as $attachment_data) {
             $attachment_data['record_id'] = $record->id;
 
             $attachment = new Attachment();
@@ -87,39 +85,32 @@ class RecycleController extends Controller
         $id = $request->input('id');
         $format = $request->input('format');
         $form = Form::find($id);
-        $filename = storage_path(str_random(32) . '.zip');
+        $filename = storage_path(Str::random(8) . '.zip');
 
         if (empty($format)) {
             $format = 'name code';
         }
 
-        $zipper = new \Chumper\Zipper\Zipper;
-        $zipper->make($filename);
+        $zipper = new ZipArchive();
+        $zipper->open($filename, ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
-        foreach ($form->record as $record)
-        {
-            foreach ($record->attachment as $index => $attachment)
-            {
-                $zipper->home();
+        foreach ($form->record as $record) {
+            foreach ($record->attachment as $index => $attachment) {
                 $extension = pathinfo($attachment->name, PATHINFO_EXTENSION);
 
                 $attachment_name = str_replace('name', $record->name, $format);
                 $attachment_name = str_replace('code', $record->code, $attachment_name);
 
-                if ($record->attachment->count() > 1)
-                {
-                    $folder = $zipper->folder($attachment_name);
-
-                    $folder->add(storage_path('app/' . $attachment->name), ($index + 1).'.'.$extension);
+                if ($record->attachment->count() > 1) {
+                    $zipper->addFile(storage_path('app/' . $attachment->name), $attachment_name . '/' . ($index + 1) . '.' . $extension);
                 } else {
-                    $zipper->add(storage_path('app/' . $attachment->name), $attachment_name . '.' . $extension);
+                    $zipper->addFile(storage_path('app/' . $attachment->name), $attachment_name . '.' . $extension);
                 }
             }
-
         }
 
         $zipper->close();
 
-        return response()->download($filename, $form->name . '.zip')->deleteFileAfterSend(true);
+        return response()->download($filename, $form->name . '.zip')->deleteFileAfterSend();
     }
 }

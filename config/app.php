@@ -175,9 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Chumper\Zipper\ZipperServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-
     ],
 
     /*
